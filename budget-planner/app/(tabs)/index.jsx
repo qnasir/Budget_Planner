@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router";
 import { Button, StyleSheet, Text, View } from "react-native";
-import services from "../utils/services";
+import services from "../../utils/services";
 import { useEffect } from "react";
-import { client } from "../utils/KindeConfig";
+import { client } from "../../utils/KindeConfig";
 
 export default function Home() {
 
@@ -41,8 +41,7 @@ export default function Home() {
         <Text style={styles.subtitle}>This is my first page of your app.</Text>
         <Button
         onPress={handleLogout}
-        title='Logout' />
-  
+        title='Logout' /> 
       </View>
     </View>
   );
