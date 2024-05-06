@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 import { Button, StyleSheet, Text, View } from "react-native";
 import services from "../../utils/services";
+import { supabase } from "../../utils/SupabaseConfig"
 import { useEffect } from "react";
 import { client } from "../../utils/KindeConfig";
 
@@ -10,6 +11,7 @@ export default function Home() {
 
   useEffect(() => {
     checkUserAuth();
+    getCategoryList();
   }, [])
   
   // To check if the user is already authenticated or not
@@ -32,6 +34,18 @@ export default function Home() {
       await services.storeData('login', 'false');
       router.replace('/login');
     }
+  }
+
+  const getCategoryList = async () => {
+
+    const user = await client.getUserDetails();
+
+    const {data, error} = await supabase.from('Category')
+    .select('*')
+    .eq('created_by', user.email)
+
+    console.log("Data", data)
+
   }
 
   return (
