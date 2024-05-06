@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { client } from "../../utils/KindeConfig";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
+import CircularChart from "../../components/CircularChart";
 
 export default function Home() {
 
@@ -58,6 +59,7 @@ export default function Home() {
       height: 150
       }}>
       <Header />
+      <CircularChart />
     </View>
   );
 }
