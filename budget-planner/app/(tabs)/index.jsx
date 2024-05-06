@@ -1,9 +1,11 @@
 import { useRouter } from "expo-router";
 import { Button, StyleSheet, Text, View } from "react-native";
 import services from "../../utils/services";
-import { supabase } from "../../utils/SupabaseConfig"
+import { supabase } from "../../utils/SupabaseConfig";
 import { useEffect } from "react";
 import { client } from "../../utils/KindeConfig";
+import Header from "../../components/Header";
+import Colors from "../../utils/Colors";
 
 export default function Home() {
 
@@ -49,39 +51,13 @@ export default function Home() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Abdul Nasir Qureshi</Text>
-        <Text style={styles.subtitle}>This is my first page of your app.</Text>
-        <Button
-        onPress={handleLogout}
-        title='Logout' /> 
-      </View>
+    <View style={{ 
+      marginTop: 20,
+      padding: 20,
+      backgroundColor: Colors.PRIMARY,
+      height: 150
+      }}>
+      <Header />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-  button: {
-    marginTop: 20,
-  }
-});
