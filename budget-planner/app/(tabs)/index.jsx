@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { Button, StyleSheet, Text, View } from "react-native";
 import services from "../../utils/services";
 import { supabase } from "../../utils/SupabaseConfig";
@@ -7,6 +7,7 @@ import { client } from "../../utils/KindeConfig";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import CircularChart from "../../components/CircularChart";
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Home() {
 
@@ -52,8 +53,11 @@ export default function Home() {
   }
 
   return (
-    <View style={{ 
+    <View style={{
       marginTop: 20,
+      flex: 1
+    }}>
+      <View style={{ 
       padding: 20,
       backgroundColor: Colors.PRIMARY,
       height: 150
@@ -61,5 +65,17 @@ export default function Home() {
       <Header />
       <CircularChart />
     </View>
+    <Link href={'/add-new-category'} style={styles.addBtnContainer}>
+      <Ionicons name="add-circle" size={54} color={Colors.PRIMARY} />
+    </Link>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  addBtnContainer: {
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
+  }
+})
