@@ -39,8 +39,8 @@ export default function Header() {
         width: '85%'
       }}>
         <View>
-          <Text style={{ color: Colors.WHITE,  fontSize: 16 }}>Welcome,</Text>
-          <Text  style={{ color: Colors.WHITE, fontSize: 20, fontWeight: 'bold' }}>{user?.given_name}</Text>
+          <Text style={{ color: Colors.WHITE,  fontSize: 16, fontFamily: 'outfit' }}>Welcome,</Text>
+          <Text  style={{ color: Colors.WHITE, fontSize: 20, fontWeight: 'bold', fontFamily: 'outfit-bold' }}>{user?.given_name}</Text>
         </View>
         <Ionicons name="notifications" size={24} color="white" />
       </View>
