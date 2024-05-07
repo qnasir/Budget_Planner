@@ -6,8 +6,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { client } from '../utils/KindeConfig';
 import ColorPicker from '../components/ColorPicker';
+import { useRouter } from 'expo-router';
 
 export default function AddNewCategory() {
+
+  const router = useRouter();
 
   const [selectedIcon, setSelectedIcon] = useState('IC');
   const [selectedColor, setSelectedColor] = useState(Colors.PRIMARY);
@@ -15,6 +18,7 @@ export default function AddNewCategory() {
   const [totalBudget, setTotalBudget] = useState();
 
   const onCreateCategory = async () => {
+
 
     const user = await client.getUserDetails();
 
@@ -29,13 +33,14 @@ export default function AddNewCategory() {
           created_by: user.email
         }
       ]).select();
-    console.log("data", data)
-    console.log("name", categoryName)
-    console.log("assigned_budged", totalBudget)
-    console.log("created_by", user.email)
-    console.log("color", selectedColor)
 
     if (data) {
+      router.replace({
+        pathname: '/category-detail',
+        params: {
+          categoryId: data[0].id
+        }
+      })
       ToastAndroid.show('Category Created!', ToastAndroid.SHORT)
     }
   }
