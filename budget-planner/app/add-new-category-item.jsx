@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Image, ToastAndroid } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Image, ToastAndroid, ActivityIndicator } from 'react-native';
 import React, { useState } from 'react';
 import Colors from '../utils/Colors';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,6 +19,7 @@ export default function AddNewCategoryItem() {
     const [url, setUrl] = useState();
     const [cost, setCost] = useState();
     const [note, setNote] = useState();
+    const [loading, setLoading] = useState(false);
     const [previewImage, setPreviewImage] = useState(placeholder);
 
     const { categoryId } = useLocalSearchParams();
@@ -39,6 +40,7 @@ export default function AddNewCategoryItem() {
     }
 
     const onClickAdd = async () => {
+        setLoading(true);
         const fileName = Date.now();
         const { data, error } = await supabase
         .storage
@@ -61,6 +63,7 @@ export default function AddNewCategoryItem() {
             }).select();
 
             ToastAndroid.show("New Item Added!!!", ToastAndroid.SHORT);
+            setLoading(false);
             router.replace({
                 pathname: 'category-detail',
                 params: {
@@ -97,8 +100,10 @@ export default function AddNewCategoryItem() {
                     <TextInput onChangeText={(value) => setNote(value)} numberOfLines={3} placeholder='Note' style={styles.input} />
                 </View>
 
-                <TouchableOpacity onPress={() => onClickAdd()} disabled={!name || !cost} style={styles.button}>
+                <TouchableOpacity onPress={() => onClickAdd()} disabled={!name || !cost || loading} style={styles.button}>
+                    {loading ? <ActivityIndicator color={Colors.WHITE} /> :                  
                     <Text style={{ textAlign: 'center', fontFamily: 'outfit-bold', color: Colors.WHITE }}>Add</Text>
+                    }
                 </TouchableOpacity>
 
             </ScrollView>
