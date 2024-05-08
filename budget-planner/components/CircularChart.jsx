@@ -12,9 +12,7 @@ export default function CircularChart({ categoryList }) {
     const [totalCalculatedEstimate, setTotalCalculatedEstimate] = useState(0);
     const [sliceColor, setSliceColor] = useState([Colors.GRAY]);
 
-    useEffect(() => {
-        updateCircularChart();
-    }, []);
+    
 
     const updateCircularChart = () => {
 
@@ -47,6 +45,10 @@ export default function CircularChart({ categoryList }) {
         setValues(values => [...values, otherCost])
     }
 
+    useEffect(() => {
+        updateCircularChart();
+    }, [categoryList]);
+
     return (
         <View style={styles.container}>
             <Text style={{
@@ -54,6 +56,7 @@ export default function CircularChart({ categoryList }) {
                 fontFamily: 'outfit'
             }}>Total Estimate : <Text style={{ fontFamily: 'outfit-bold' }}>${totalCalculatedEstimate}</Text></Text>
             <View style={styles.subContainer}>
+                
                 <PieChart
                     widthAndHeight={widthAndHeight}
                     series={values}
