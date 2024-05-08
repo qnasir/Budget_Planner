@@ -16,6 +16,15 @@ export default function CategoryList({ categoryList }) {
         })
     }
 
+    const calculateTotalCost = (categoryItems) => {
+        let totalCost = 0;
+        categoryItems.forEach(item => {
+            totalCost = totalCost + item.cost;
+        })
+
+        return totalCost;
+    }
+
     return (
         <View style={{
             marginTop: 20
@@ -38,7 +47,7 @@ export default function CategoryList({ categoryList }) {
                                 <Text style={styles.categoryText}>{category.name}</Text>
                                 <Text style={styles.itemCount}>{category?.CategoryItems?.length}Items</Text>
                             </View>
-                            <Text style={styles.totalAmountText}>$5000</Text>
+                            <Text style={styles.totalAmountText}>${calculateTotalCost(category?.CategoryItems)}</Text>
                         </View>
                     </TouchableOpacity>
                 ))}
@@ -65,7 +74,10 @@ const styles = StyleSheet.create({
     iconText: {
         fontSize: 35,
         padding: 16,
-        borderRadius: 15
+        borderRadius: 15,
+        width: 75,
+        textAlign: 'center',
+        color: Colors.WHITE
     },
     categoryText: {
         fontFamily: 'outfit-bold',
