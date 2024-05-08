@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useLocalSearchParams, useRouter } from 'expo-router';
@@ -28,13 +28,14 @@ export default function CategoryDetails() {
 
     return (
         <View style={{ padding: 20, marginTop: 20, flex: 1, backgroundColor: Colors.WHITE }}>
-            <TouchableOpacity onPress={() => router.back()}>
-                <Ionicons name="arrow-back-circle" size={44} color={Colors.BLACK} />
-            </TouchableOpacity>
-            <CourseInfo categoryData={categoryData} />
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
+                    <Ionicons name="arrow-back-circle" size={44} color={Colors.BLACK} />
+                </TouchableOpacity>
+                <CourseInfo categoryData={categoryData} />
 
-            <CourseItemList categoryData={categoryData} />
-
+                <CourseItemList setUpdateRecord={() => getCategoryDetail()} categoryData={categoryData} />
+            </ScrollView>
             <Link
                 href={{
                     pathname: '/add-new-category-item',
@@ -42,7 +43,7 @@ export default function CategoryDetails() {
                         categoryId: categoryData.id
                     }
                 }}
-            style={styles.floatingBtn}>
+                style={styles.floatingBtn}>
                 <Ionicons name='add-circle' size={60} color={Colors.PRIMARY} />
             </Link>
         </View>
